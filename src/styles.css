@@ -1,0 +1,32 @@
+body {
+    background-color: #191919;
+    color: #bada55;
+    text-shadow: 0 0 2px #e5e5e5;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+#console {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+
+code {
+    width: fit-content;
+    padding: 0 2rem;
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #bbda5541;
+    border-radius: 3rem;
+}

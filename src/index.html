@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin Linked List</title>
+</head>
+<body>
+    <div id="console">
+
+    </div>
+    <script defer> 
+        //Overrides the console.log() to display messages on page
+        const tab = document.getElementById('console');
+        const log = (message) => {
+            const body = document.createElement('code');
+            body.textContent = message;
+            tab.appendChild(body);
+        }
+        console.log = log;
+        console.log(`--> This messages are redirected from dev console:`)
+    </script>
+</body>
+</html>
