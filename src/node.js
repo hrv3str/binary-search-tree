@@ -1,15 +1,15 @@
 export default class Node {
     constructor (value) {
-        this.value = value;
-        this.leftNode = null;
-        this.rightNode = null;
+        this.data = value;
+        this.left = null;
+        this.right = null;
     }
 
     linkLeft(node) {
-        this.leftNode = node;
+        this.left = node;
     }
 
     linkRight(node) {
-        this.rightNode = node;
+        this.right = node;
     }
 };
