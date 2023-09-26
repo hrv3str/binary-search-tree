@@ -12,8 +12,8 @@ export default class Tree {
         const mid = Math.floor((start + end) / 2);
         const root = new Node(array[mid]);
 
-        root.left = (this.build(array, start, mid -1));
-        root.right = (this.build(array, mid +1, end));
+        root.left = this.build(array, start, mid -1);
+        root.right = this.build(array, mid +1, end);
 
         return root;
     }
@@ -202,5 +202,10 @@ export default class Tree {
         }
         
         return checkBalance(this.root);
+    }
+
+    rebalance() {
+        const values = this.inorder();
+        this.root = this.build(values, 0, values.length -1);
     }
 }
