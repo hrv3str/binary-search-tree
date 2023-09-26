@@ -122,4 +122,85 @@ export default class Tree {
 
         if (result.length > 0) return result;
     };
+
+    inorder (_target = this.root, callback = null) {
+        const result = [];
+        
+        const traverse = (node) => {
+            if (node === null) return;
+            traverse(node.left);
+            if (callback === null) result.push(node.data);
+            else callback(node.data);
+            traverse(node.right);
+        }
+
+        traverse(_target);
+        if (result.length > 0) return result;
+    }
+
+    preorder (_target = this.root, callback = null) {
+        const result = [];
+
+        const traverse = (node) => {
+            if (callback === null) result.push(node.data);
+            else callback(node.data);
+            traverse(node.left);
+            traverse(node.right);
+        }
+
+        traverse(_target);
+        if (result.length > 0) return result;
+    }
+
+    postorder (_target = this.root, callback = null) {
+        const result = [];
+
+        const traverse = (node) => {
+            traverse(node.left);
+            traverse(node.right);
+            if (callback === null) result.push(node.data);
+            else callback(node.data);
+        }
+
+        traverse(_target);
+        if (result.length > 0) return result;
+    }
+
+    height(node) {
+        if (node === null) return -1
+
+        const leftHeight = this.height(node.left);
+        const rightHeight = this.height(node.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    depth(node) {
+        if (node === null) return -1;
+
+        let pointer = this.root;
+        let depth = 0;
+
+        while (pointer !== node) {
+            if (node.data < pointer.data) pointer = pointer.left;
+            else pointer = pointer.right;
+            depth++;
+        }
+
+        return depth;
+    }
+
+    isBalanced() {
+        const checkBalance = (node) => {
+            if (node === null) return true;
+            const leftHeight = this.height(node.left);
+            const rightHeight = this.height(node.right);
+
+            if((leftHeight - rightHeight) > 1) return false;
+            return checkBalance(node.left)
+                && checkBalance(node.right);
+        }
+        
+        return checkBalance(this.root);
+    }
 }
