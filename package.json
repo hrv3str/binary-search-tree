@@ -9,7 +9,8 @@
     "deploy-demo": "git push origin :gh-pages && git subtree push --prefix dist origin gh-pages",
     "build": "webpack --config webpack.config.js",
     "config": "code webpack.config.js",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "was": "concurrently \"npm run watch\" \"npm run serve\""
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@babel/preset-env": "^7.16.7",
     "babel-loader": "^8.3.0",
     "clean-webpack-plugin": "^4.0.0",
+    "concurrently": "^8.2.1",
     "css-loader": "^6.8.1",
     "eslint": "^8.48.0",
     "eslint-config-airbnb-base": "^15.0.0",
