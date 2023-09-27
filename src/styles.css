@@ -1,8 +1,9 @@
 :root{
-    --font: monospace;
+    --font: "Courier";
     --co-first: #bada55;
     --co-second: #191919;
     --co-third: #e5e5e5;
+    --co-fourth: #f5f128;
     --border: 2px solid var(--co-first);
     --shadow: 0 0 3px var(--co-third);
 }
@@ -14,33 +15,43 @@ body {
     width: 98vw;
     height: 98vh;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vh auto;
+}
+
+body > .frame {
     display: grid;
     grid-template-areas: 
         "left left right"
         "left left right"
-        "left left right"
         "bottom bottom bottom";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 0.5rem;
-    margin: 1vh auto;
+    width: 80%;
+    height: 80%;
 }
 
 button {
     font-family: var(--font);
+    text-shadow: var(--shadow);
     color: var(--co-first);
     background-color: transparent;
     border: var(--border);
     outline: none;
-    height: 100%;
+    height: 2.5rem;
     padding: 0.5rem;
-    font-weight: 700;
     font-size: 1rem;
-    margin: 0 0.5rem;
+    cursor: pointer;
 }
 
 .panel {
     width: 100%;
     height: 100%;
     border: var(--border);
+    box-shadow: var(--shadow);
 }
 
 .panel.left {
@@ -48,19 +59,214 @@ button {
 }
 
 .panel.right {
+    font-family: var(--font);
     grid-area: right;
+    display: grid;
+    grid-template-areas: 
+        "console console"
+        "isBalancedLabel isBalanced"
+        "levelOrderLabel levelOrder"
+        "inOrderLabel inOrder"
+        "preOrderLabel preOrder"
+        "postOrderLabel postOrder"
+    ;
+    grid-template-rows: 1fr repeat(5, auto);
+    gap: 0,5rem;
 }
 
 .panel.bottom {
     grid-area: bottom;
 }
 
-.frame.array {
+.frame {
     width:calc(100% - 1.2rem);
     margin: 0.5rem auto;
     height: fit-content;
     display: grid;
-    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+}
+
+.frame.array {
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 100%;
+    align-items: baseline;
+}
+
+.array-placeholder {
+    grid-column: 1 / -1;
+    width: 100%;
+    height: 100%;
+    color: var(--co-first);
+    padding-right: 0.5rem;
+    text-align: right;
+    text-shadow: none;
+    opacity: 0.5;
+    color: var(--co-third);
+}
+
+.number-plate {
+    transform: scale(1);
+    opacity: 1;
+    animation: plate-appear;
+    animation-duration: 100ms;
+    animation-iteration-count: 1;
+}
+
+@keyframes plate-appear {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    1% {
+        transform: scale(3);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.frame.controls {
+    grid-template-areas:
+        "build build build"
+        "insertLabel insertInput insertInput"
+        "deleteLabel deleteInput deleteInput"
+        "findLabel findInput findInput"
+        "balance balance balance"
+        ;
+}
+
+#build-tree {
+    grid-area: build;
+}
+
+label[for=insert-input] {
+    grid-area: insertLabel;
+}
+
+label[for=delete-input] {
+    grid-area: deleteLabel;
+}
+
+label[for="find-input"] {
+    grid-area: findLabel;
+}
+
+label > button {
+    width: 100%;
+}
+
+#insert-input {
+    grid-area: insertInput;
+}
+
+#delete-input {
+    grid-area: deleteInput;
+}
+
+#find-input {
+    grid-area: findInput;
+}
+
+#balance-tree {
+    grid-area: balance;
+}
+
+input,
+select {
+    background-color: transparent;
+    border: var(--border);
+    text-align: right;
+    color: var(--co-first);
+    font-family: var(--font);
+    padding-right: 0.5rem;
+}
+
+select {
+    color: var(--co-third);
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+option {
+    color: var(--co-first);
+    background-color: var(--co-second);
+    outline: none;
+    border: var(--border);
+}
+
+input:focus {
+    border: var(--border);
+    outline: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.array > .panel {
+    color: var(--co-fourth);
+    font-family: var(--font);
+    width: auto;
+    min-height: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    align-content: center;
+    justify-items: center;
+}
+
+.label {
+    padding-left: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+#console {
+    grid-area: console;
+}
+
+.is-balanced {
+    grid-area: isBalancedLabel;
+}
+
+#is-balanced {
+    grid-area: isBalanced;
+}
+
+.level-order {
+    grid-area: levelOrderLabel;
+}
+
+#level-order {
+    grid-area: levelOrder;
+}
+
+.in-order {
+    grid-area: inOrderLabel;
+}
+
+#in-order {
+    grid-area: inOrder;
+}
+
+.pre-order {
+    grid-area: preOrderLabel;
+}
+
+#pre-order {
+    grid-area: preOrder;
+}
+
+.post-order {
+    grid-area: postOrderLabel;
+}
+
+#post-order {
+    grid-area: postOrder;
 }
 
 ::-webkit-scrollbar {

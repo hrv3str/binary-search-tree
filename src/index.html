@@ -6,13 +6,64 @@
     <title>Odin Binary Search Tree</title>
 </head>
 <body>
-    <div class="panel left">
-        <div class="frame array">
-            <button>Generate Array!</button>
-            <div class="panel"></div>
+    <div class="frame">
+        <div class="panel left">
+            <div class="frame array">
+                <button id="generator">
+                    Generate Array!
+                </button>
+                <div class="panel"
+                    id="array-display">
+                        <div class="array-placeholder">click &quot;Generate Array!&quot;</div>
+                </div>
+            </div>
+            <div class="frame controls">
+                <button id=build-tree>
+                    .build()
+                </button>
+                <label for="insert-input">
+                    <button>.insert()</button>
+                </label>
+                <input type="number"
+                    id="insert-input"
+                    min="100"
+                    max="999"
+                    placeholder="print number">
+                <label for="delete-input">
+                    <button>.delete()</button>
+                </label>
+                <select name="number" id="delete-input">
+                    <option value="">select number</option>
+                </select>
+                <label for="find-input">
+                    <button>.find()</button>
+                </label>
+                <input type="number"
+                    id="find-input"
+                    min="100"
+                    max="999"
+                    placeholder="print number"">
+                <button id="balance-tree">.rebalance()</button>
+            </div>
         </div>
+        <div class="panel right">
+            <div id="console"
+                class="frame">
+            </div>
+            <div class="label is-balanced">Tree is balanced:</div>
+            <div id="is-balanced"></div>
+            <div class="label level-order">
+                Level order:
+            </div>
+            <div id="level-order"></div>
+            <div class="label in-order">In-order:</div>
+            <div id="in-order"></div>
+            <div class="label pre-order">Pre-order</div>
+            <div id="pre-order"></div>
+            <div class="label post-order">Post-order</div>
+            <div id="post-order"></div>
+        </div>
+        <div class="panel bottom"></div>
     </div>
-    <div class="panel right"></div>
-    <div class="panel bottom"></div>
 </body>
 </html>
