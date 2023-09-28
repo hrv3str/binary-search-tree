@@ -59,6 +59,23 @@ const display = (() => {
         buildButton.classList.remove('fade');
     }
 
+    const errorPromtInsert = () => {
+        printOutput('!!Error: print number for insertion');
+    }
+
+    const errorPromtTooSmall = () => {
+        printOutput('!!Error: printed number is too small. It must be 100 or greater');
+    }
+
+    const errorPromtTooBig = () => {
+        printOutput('!!Error: printed number is too big. It must be 999 or less');
+    }
+
+    const errorPromtDuplicate = () => {
+        printOutput('!!Error: tree alredy contains the printed number. Try another');
+    }
+    
+
     const array = () => {
         const input = buffer.readArray();
         arrayDisplay.innerHTML = null;
@@ -110,7 +127,11 @@ const display = (() => {
     return {
         array,
         tree,
-        fadeUI
+        fadeUI,
+        errorPromtInsert,
+        errorPromtTooBig,
+        errorPromtTooSmall,
+        errorPromtDuplicate
     }
 })();
 
