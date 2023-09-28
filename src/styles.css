@@ -59,23 +59,50 @@ button {
 }
 
 .panel.right {
-    font-family: var(--font);
     grid-area: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+code {
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    animation: faderight;
+    animation-duration: 300ms;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-out;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@keyframes faderight {
+    0% {
+        opacity: 0;
+        transform: translateX(20rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.panel.bottom {
+    font-family: var(--font);
+    grid-area: bottom;
     display: grid;
     grid-template-areas: 
-        "console console"
         "isBalancedLabel isBalanced"
         "levelOrderLabel levelOrder"
         "inOrderLabel inOrder"
         "preOrderLabel preOrder"
         "postOrderLabel postOrder"
     ;
-    grid-template-rows: 1fr repeat(5, auto);
+    grid-template-rows: repeat(4, auto) 1fr;
+    grid-template-columns: auto 1fr;
     gap: 0,5rem;
-}
-
-.panel.bottom {
-    grid-area: bottom;
 }
 
 .frame {
@@ -225,16 +252,14 @@ input[type='number']::-webkit-outer-spin-button {
     margin-bottom: 0.2rem;
 }
 
-#console {
-    grid-area: console;
-}
-
 .is-balanced {
     grid-area: isBalancedLabel;
+    margin-top: 0.5rem;
 }
 
 #is-balanced {
     grid-area: isBalanced;
+    margin-top: 0.5rem;
 }
 
 .level-order {
