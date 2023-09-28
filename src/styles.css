@@ -99,8 +99,9 @@ code {
         "inOrderLabel inOrder"
         "preOrderLabel preOrder"
         "postOrderLabel postOrder"
+        "output output"
     ;
-    grid-template-rows: repeat(4, auto) 1fr;
+    grid-template-rows: repeat(5, auto) 1fr;
     grid-template-columns: auto 1fr;
     gap: 0,5rem;
 }
@@ -294,6 +295,10 @@ input[type='number']::-webkit-outer-spin-button {
     grid-area: postOrder;
 }
 
+#text-output {
+    grid-area: output;
+}
+
 ::-webkit-scrollbar {
     background-color: transparent;
 }
@@ -301,4 +306,14 @@ input[type='number']::-webkit-outer-spin-button {
 ::-webkit-scrollbar-thumb {
     background-color: #bbda5541;
     border-radius: 3rem;
+}
+
+.fade {
+    opacity: 0.2;
+    pointer-events: none;
+    filter: grayscale();
+}
+
+.un-fade {
+    transition: all 100ms ease-out;
 }

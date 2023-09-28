@@ -1,3 +1,5 @@
+import buffer from './index.js'
+
 const display = (() => {
     const arrayDisplay = document.getElementById('array-display');
     const arrayList = document.getElementById('delete-input');
@@ -7,6 +9,55 @@ const display = (() => {
     const inOrderLine = document.getElementById('in-order');
     const preOrderLine = document.getElementById('pre-order');
     const postOrderLine = document.getElementById('post-order');
+    const buttons = document.querySelectorAll('button');
+    const inputs = document.querySelectorAll('input');
+    const selects = document.querySelectorAll('select');
+    const labels = document.querySelectorAll('div.label');
+    const textOutput = document.getElementById('text-output');
+    const buildButton = document.getElementById('build-tree');
+
+    const printOutput = (arg) => {
+        if (typeof arg === 'string') {
+            const body = document.createElement('div');
+            body.textContent = arg;
+            textOutput.appendChild(body);
+        } else {
+            textOutput.appendChild(arg);
+        }
+    }
+
+    const mergeLists = (...nodelists) => {
+        const result = [];
+        nodelists.forEach(nodelist => {
+            for (let i = 0; i < nodelist.length; i++) {
+                if (nodelist[i].id === 'generator') continue;
+                result.push(nodelist[i]);
+            };
+        });
+        return result;
+    }
+
+    const fadeables = mergeLists (buttons, inputs, selects, labels);
+
+    const fadeUI = () => {
+        fadeables.forEach(item => {
+            item.classList.add('fade');
+        })
+    }
+
+    const unFadeUI = () => {
+        fadeables.forEach(item => {
+            item.classList.add('un-fade');
+            if(item.classList.contains('fade')) {
+                item.classList.remove('fade');
+            };
+        })
+    }
+
+    const unFadeBuild = () => {
+        buildButton.classList.add('un-fade');
+        buildButton.classList.remove('fade');
+    }
 
     const array = () => {
         const input = buffer.readArray();
@@ -23,7 +74,9 @@ const display = (() => {
             listItem.value=number;
             arrayDisplay.appendChild(plate);
             arrayList.appendChild(listItem);
-        })
+        });
+        unFadeBuild()
+        printOutput('--array generated. You can now build BST');
     }
 
     const tree = () => {
@@ -50,11 +103,14 @@ const display = (() => {
         inOrderLine.textContent = `[${stats.levelOrder}]`;
         preOrderLine.textContent = `[${stats.preOrder}]`;
         postOrderLine.textContent = `[${stats.postOrder}]`;
+        printOutput('--tree is built');
+        unFadeUI();
     }
 
     return {
         array,
-        tree
+        tree,
+        fadeUI
     }
 })();
 
