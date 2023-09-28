@@ -106,7 +106,7 @@ export default class Tree {
 
     levelOrder (callback = null) {
         const result = [];
-        if (this.root === null) return result;
+        if (this.root === null) return;
 
         const queue = [];
         queue.push(this.root);
@@ -142,6 +142,7 @@ export default class Tree {
         const result = [];
 
         const traverse = (node) => {
+            if (node == null) return;
             if (callback === null) result.push(node.data);
             else callback(node.data);
             traverse(node.left);
@@ -156,6 +157,7 @@ export default class Tree {
         const result = [];
 
         const traverse = (node) => {
+            if (node == null) return;
             traverse(node.left);
             traverse(node.right);
             if (callback === null) result.push(node.data);
