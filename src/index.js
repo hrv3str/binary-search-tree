@@ -11,14 +11,16 @@ const insertButton = document.getElementById('insert');
 const buffer = (() => {
     const bufferObject = {
         tree: undefined,
+        checkArray: [],
     }
 
     const readArray = () => {
-        return bufferObject.tree.data;
+        return bufferObject.checkArray;
     }
 
     const setArray = (object) => {
         bufferObject.tree = object;
+        bufferObject.checkArray = [...object.data]
     }
 
     const printTree = () => {
@@ -44,6 +46,7 @@ const buffer = (() => {
 
     const insertNumber = (number) => {
         bufferObject.tree.insert(number);
+        bufferObject.checkArray.push(number)
     }
 
     return {
@@ -74,6 +77,7 @@ const handleInsert = () => {
     } else {
         buffer.insertNumber(number);
         display.tree();
+        display.array();
     }
 }
 
@@ -82,6 +86,7 @@ const handleGenerator = () => {
     const tree = new Tree(array)
     buffer.setArray(tree);
     display.array();
+    display.generatorPromtArray();
     buildButton.addEventListener('click', handleBuild);
 }
 
