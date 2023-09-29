@@ -8,11 +8,13 @@ const arrayButton = document.getElementById('generator');
 const buildButton = document.getElementById('build-tree');
 const insertButton = document.getElementById('insert');
 const deleteButton = document.getElementById('delete');
+const findButton = document.getElementById('find');
 
 const buffer = (() => {
     const bufferObject = {
         tree: undefined,
         checkArray: [],
+        findNode: undefined
     }
 
     const readArray = () => {
@@ -24,8 +26,8 @@ const buffer = (() => {
         bufferObject.checkArray = [...object.data]
     }
 
-    const printTree = () => {
-        bufferObject.tree.print();
+    const printTree = (node) => {
+        bufferObject.tree.print(node);
     }
 
     const treeStats = () => {
@@ -45,6 +47,10 @@ const buffer = (() => {
         }
     }
 
+    const passFindNode = () => {
+        return bufferObject.findNode
+    }
+
     const insertNumber = (number) => {
         bufferObject.tree.insert(number);
         bufferObject.checkArray.push(number)
@@ -56,15 +62,36 @@ const buffer = (() => {
         bufferObject.checkArray.splice(index, 1);
     }
 
+    const findNode = (value) => {
+        const node = bufferObject.tree.find(value);
+        if (node !== null) {
+            bufferObject.findNode = node;
+            display.find();
+        }
+        else display.promtNotFound()
+    }
+
     return {
         readArray,
         setArray,
         printTree,
         treeStats,
         insertNumber,
-        deleteNumber
+        deleteNumber,
+        findNode,
+        passFindNode
     }
 })();
+
+const handleFind = () => {
+    const input = document.getElementById('find-input');
+    const number = parseInt(input.value, 10);
+    if (input.value === '') {
+        return
+    } else {
+        buffer.findNode(number);
+    }
+}
 
 const handleDelete = () => {
     const input = document.getElementById('delete-input');
@@ -119,7 +146,7 @@ const handleBuild = () => {
     display.tree();
     insertButton.addEventListener('click', handleInsert);
     deleteButton.addEventListener('click', handleDelete);
-
+    findButton.addEventListener('click', handleFind);
 }
 
 display.fadeUI();
