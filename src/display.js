@@ -21,8 +21,10 @@ const display = (() => {
             const body = document.createElement('div');
             body.textContent = arg;
             textOutput.appendChild(body);
+            body.scrollIntoView({ behaviour: 'smooth'});
         } else {
             textOutput.appendChild(arg);
+            arg.scrollIntoView({ behaviour: 'smooth'})
         }
     }
 
@@ -74,8 +76,12 @@ const display = (() => {
     const errorPromtDuplicate = () => {
         printOutput('!!Error: tree alredy contains the printed number. Try another');
     }
-    
 
+    const generatorPromtArray = () => {
+        unFadeBuild()
+        printOutput('--array generated. You can now build BST');
+    }
+    
     const array = () => {
         const input = buffer.readArray();
         arrayDisplay.innerHTML = null;
@@ -92,8 +98,6 @@ const display = (() => {
             arrayDisplay.appendChild(plate);
             arrayList.appendChild(listItem);
         });
-        unFadeBuild()
-        printOutput('--array generated. You can now build BST');
     }
 
     const tree = () => {
@@ -131,7 +135,8 @@ const display = (() => {
         errorPromtInsert,
         errorPromtTooBig,
         errorPromtTooSmall,
-        errorPromtDuplicate
+        errorPromtDuplicate,
+        generatorPromtArray
     }
 })();
 
