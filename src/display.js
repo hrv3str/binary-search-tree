@@ -69,6 +69,10 @@ const display = (() => {
         printOutput('!!Error: print a number to find node');
     }
 
+    const errorPromtBalance = () => {
+        printOutput('!!Error: tree is already balanced');
+    }
+
     const errorPromtInsert = () => {
         printOutput('!!Error: print number for insertion');
     }
@@ -99,7 +103,11 @@ const display = (() => {
     }
 
     const promtNotFound = () => {
-        printOutput(`-- no nodes with this value`);
+        printOutput(`-- no nodes with this value found`);
+    }
+
+    const promtBalance = () => {
+        printOutput(`-- tree is re-balanced`);
     }
     
     const array = () => {
@@ -123,6 +131,7 @@ const display = (() => {
     const find = () => {
         const node = buffer.passFindNode();
         const numberSpans = document.querySelectorAll('span');
+        const stats = buffer.nodeStats(node.data);
         const findSpan = () => {
             const result = [];
             Array.from(numberSpans).forEach(span => {
@@ -143,9 +152,9 @@ const display = (() => {
                 highlight.classList.remove("highlight")
             };
 
-            setTimeout(dim, 300);
+            setTimeout(dim, 1000);
         }
-        printOutput(`--found node ${node.data}`);
+        printOutput(`--found node ${node.data}: height is ${stats.height}, depth is ${stats.depth}`);
 
         highlight.addEventListener('transitionend' ,removeHighlights);
     }
@@ -192,7 +201,9 @@ const display = (() => {
         promptDelete,
         find,
         promtNotFound,
-        errorPromtFind
+        errorPromtFind,
+        errorPromtBalance,
+        promtBalance
     }
 })();
 
