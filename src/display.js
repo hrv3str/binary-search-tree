@@ -61,6 +61,10 @@ const display = (() => {
         buildButton.classList.remove('fade');
     }
 
+    const errorPromtDelete = () => {
+        printOutput('!!Error: choose a number to delete from the list');
+    }
+
     const errorPromtInsert = () => {
         printOutput('!!Error: print number for insertion');
     }
@@ -81,12 +85,20 @@ const display = (() => {
         unFadeBuild()
         printOutput('--array generated. You can now build BST');
     }
+
+    const promtInsert = (number) => {
+        printOutput(`-- inserted number ${number}`);
+    }
+
+    const promptDelete = (number) => {
+        printOutput(`-- deleted number ${number}`);
+    }
     
     const array = () => {
         const input = buffer.readArray();
         arrayDisplay.innerHTML = null;
         arrayList.innerHTML = `
-            <option value=''>select number</option>
+            <option value=0>select number</option>
         `;
         input.forEach(number => {
             const plate = document.createElement('div');
@@ -136,7 +148,10 @@ const display = (() => {
         errorPromtTooBig,
         errorPromtTooSmall,
         errorPromtDuplicate,
-        generatorPromtArray
+        generatorPromtArray,
+        errorPromtDelete,
+        promtInsert,
+        promptDelete
     }
 })();
 
