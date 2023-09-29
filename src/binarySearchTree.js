@@ -94,7 +94,7 @@ export default class Tree {
     };
 
     find (value) {
-        const findNode = (node, value) => {
+        const findNode = (node = this.root, value) => {
             if (node === null || node.data === value) return node;
 
             if (value < node.data) return findNode(node.left, value);
