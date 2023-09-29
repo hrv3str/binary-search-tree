@@ -321,3 +321,10 @@ input[type='number']::-webkit-outer-spin-button {
 .un-fade {
     transition: all 100ms ease-out;
 }
+
+.highlight {
+    transition: all 200ms ease-in;
+    color: var(--co-third);
+    text-shadow: 0 0 10 var(--co-fourth);
+    transform: scale(2);
+}
