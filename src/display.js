@@ -65,6 +65,10 @@ const display = (() => {
         printOutput('!!Error: choose a number to delete from the list');
     }
 
+    const errorPromtFind = () => {
+        printOutput('!!Error: print a number to find node');
+    }
+
     const errorPromtInsert = () => {
         printOutput('!!Error: print number for insertion');
     }
@@ -93,6 +97,10 @@ const display = (() => {
     const promptDelete = (number) => {
         printOutput(`-- deleted number ${number}`);
     }
+
+    const promtNotFound = () => {
+        printOutput(`-- no nodes with this value`);
+    }
     
     const array = () => {
         const input = buffer.readArray();
@@ -110,6 +118,36 @@ const display = (() => {
             arrayDisplay.appendChild(plate);
             arrayList.appendChild(listItem);
         });
+    }
+
+    const find = () => {
+        const node = buffer.passFindNode();
+        const numberSpans = document.querySelectorAll('span');
+        const findSpan = () => {
+            const result = [];
+            Array.from(numberSpans).forEach(span => {
+                if (span.textContent == node.data) {
+                    result.push(span);
+                }
+            })
+            return result[0];
+        }
+
+        const highlight = findSpan();
+        highlight.classList.add("highlight");
+
+        const removeHighlights = () => {
+            highlight.removeEventListener('transitionend' ,removeHighlights);
+
+            const dim = () => {
+                highlight.classList.remove("highlight")
+            };
+
+            setTimeout(dim, 300);
+        }
+        printOutput(`--found node ${node.data}`);
+
+        highlight.addEventListener('transitionend' ,removeHighlights);
     }
 
     const tree = () => {
@@ -151,7 +189,10 @@ const display = (() => {
         generatorPromtArray,
         errorPromtDelete,
         promtInsert,
-        promptDelete
+        promptDelete,
+        find,
+        promtNotFound,
+        errorPromtFind
     }
 })();
 
