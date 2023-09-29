@@ -64,6 +64,8 @@ button {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 code {
@@ -101,7 +103,7 @@ code {
         "postOrderLabel postOrder"
         "output output"
     ;
-    grid-template-rows: repeat(5, auto) 1fr;
+    grid-template-rows: repeat(5, auto) 5fr;
     grid-template-columns: auto 1fr;
     gap: 0,5rem;
 }
@@ -297,6 +299,8 @@ input[type='number']::-webkit-outer-spin-button {
 
 #text-output {
     grid-area: output;
+    overflow-y: scroll;
+    max-height: 13vh;
 }
 
 ::-webkit-scrollbar {
