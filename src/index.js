@@ -7,6 +7,7 @@ import display from './display.js'
 const arrayButton = document.getElementById('generator');
 const buildButton = document.getElementById('build-tree');
 const insertButton = document.getElementById('insert');
+const deleteButton = document.getElementById('delete');
 
 const buffer = (() => {
     const bufferObject = {
@@ -49,19 +50,42 @@ const buffer = (() => {
         bufferObject.checkArray.push(number)
     }
 
+    const deleteNumber = (number) => {
+        bufferObject.tree.delete(number);
+        const index = bufferObject.checkArray.indexOf(number);
+        bufferObject.checkArray.splice(index, 1);
+    }
+
     return {
         readArray,
         setArray,
         printTree,
         treeStats,
-        insertNumber
+        insertNumber,
+        deleteNumber
     }
 })();
+
+const handleDelete = () => {
+    const input = document.getElementById('delete-input');
+    const number = parseInt(input.value, 10);
+
+    if (input.value === '0') {
+        display.errorPromtDelete();
+        return
+    } else {
+        buffer.deleteNumber(number);
+        display.promptDelete(number);
+        display.tree();
+        display.array();
+    }
+}
 
 const handleInsert = () => {
     const input = document.getElementById('insert-input');
     const data = buffer.readArray();
     const number = parseInt(input.value, 10);
+
     if (input.value === '') {
         display.errorPromtInsert();
         return;
@@ -76,6 +100,7 @@ const handleInsert = () => {
         return
     } else {
         buffer.insertNumber(number);
+        display.promtInsert(number);
         display.tree();
         display.array();
     }
@@ -93,10 +118,11 @@ const handleGenerator = () => {
 const handleBuild = () => {
     display.tree();
     insertButton.addEventListener('click', handleInsert);
+    deleteButton.addEventListener('click', handleDelete);
+
 }
 
 display.fadeUI();
-console.log(display)
 
 arrayButton.addEventListener('click', handleGenerator);
 
