@@ -9,6 +9,7 @@ const buildButton = document.getElementById('build-tree');
 const insertButton = document.getElementById('insert');
 const deleteButton = document.getElementById('delete');
 const findButton = document.getElementById('find');
+const rebalanceButoon = document.getElementById('balance-tree');
 
 const buffer = (() => {
     const bufferObject = {
@@ -47,8 +48,19 @@ const buffer = (() => {
         }
     }
 
+    const nodeStats = (value) => {
+        const node = bufferObject.tree.find(value);
+        const height = bufferObject.tree.height(node);
+        const depth = bufferObject.tree.depth(node);
+
+        return {
+            height,
+            depth
+        }
+    }
+
     const passFindNode = () => {
-        return bufferObject.findNode
+        return bufferObject.findNode;
     }
 
     const insertNumber = (number) => {
@@ -68,7 +80,11 @@ const buffer = (() => {
             bufferObject.findNode = node;
             display.find();
         }
-        else display.promtNotFound()
+        else display.promtNotFound();
+    }
+
+    const balanceTree = () => {
+        bufferObject.tree.rebalance();
     }
 
     return {
@@ -76,17 +92,33 @@ const buffer = (() => {
         setArray,
         printTree,
         treeStats,
+        nodeStats,
         insertNumber,
         deleteNumber,
         findNode,
-        passFindNode
+        passFindNode,
+        balanceTree
     }
 })();
+
+const handleRebalance = () => {
+    const stats = buffer.treeStats();
+    const isBalanced = stats.isBalanced;
+    if (isBalanced === true) {
+        display.errorPromtBalance()
+        return
+    } else {
+        buffer.balanceTree();
+        display.tree();
+        display.promtBalance();
+    }
+}
 
 const handleFind = () => {
     const input = document.getElementById('find-input');
     const number = parseInt(input.value, 10);
     if (input.value === '') {
+        display.errorPromtFind();
         return
     } else {
         buffer.findNode(number);
@@ -147,6 +179,7 @@ const handleBuild = () => {
     insertButton.addEventListener('click', handleInsert);
     deleteButton.addEventListener('click', handleDelete);
     findButton.addEventListener('click', handleFind);
+    rebalanceButoon.addEventListener('click', handleRebalance);
 }
 
 display.fadeUI();
