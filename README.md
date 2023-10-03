@@ -20,15 +20,15 @@ This project is a web application that allows users to interact with and visuali
 
 1. Visit the [Odin Binary Search Tree Visualizer](https://hrv3str.github.io/odin-binary-search-tree/) web application.
 
-[screenshot](./screenshots/generate.png)
+![screenshot](./screenshots/generate.png)
    
 2. Click the **Generate Array!** button to generate a random array of numbers.
 
-[screenshot](./screenshots/build.png)
+![screenshot](./screenshots/build.png)
 
 3. Click the **.build()** button to create a balanced BST.
 
-[screenshot](./screenshots/buttons.png)
+![screenshot](./screenshots/buttons.png)
 
 4. Input a number and click **.insert()** to insert a node into the BST.
 
